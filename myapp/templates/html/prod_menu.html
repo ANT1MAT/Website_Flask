@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ol>
+   {% for x in menu %}
+    <li>Товар: {{x.prod_name}} Цена: {{x.prod_price}} </li>
+  {% endfor %}
+ </ol>
+</body>
+</html>
