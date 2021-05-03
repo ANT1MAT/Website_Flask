@@ -1,7 +1,4 @@
-from flask_sqlalchemy import SQLAlchemy
-from app import app
-# create a new SQLAlchemy object
-db = SQLAlchemy(app)
+from myapp.database import db
 
 
 class Products(db.Model):
