@@ -1,6 +1,8 @@
+import os.path
 from flask import Flask
 from myapp.views import init_blueprints
-from myapp.database import db
+from database import db
+from myapp.models.products import create_db
 
 
 def create_app():
@@ -8,7 +10,7 @@ def create_app():
     app = Flask(__name__)
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database/database.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['UPLOAD_FOLDER'] = 'myapp/uploads'
+    app.config['UPLOAD_FOLDER'] = 'myapp/static/uploads'
     SECRET_KEY = 'FgrtGFr43Etr'
     ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
     db.init_app(app)

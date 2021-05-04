@@ -14,12 +14,16 @@ def add_prod_page():
     if request.method == 'POST':
         logging.info('Add data in DB')
         file = request.files['prod_img']
-        filename = secure_filename(file.filename)
         try:
             add = Products(prod_name=request.form['prod_name'], prod_price=request.form['prod_price'])
             db.session.add(add)
             db.session.commit()
-            file.save(os.path.join('myapp/uploads', filename))
+            filename = secure_filename(str(Products.get_id(add)) + str(Products.get_name(add)))
+            add_img = db.session.query(Products).get(Products.get_id(add))
+            add_img.prod_img = filename
+            db.session.add(add_img)
+            db.session.commit()
+            file.save(os.path.join('myapp/static/uploads', filename))
         except Exception as e:
             db.session.rollback()
             logging.error(f'Error, {e}')
