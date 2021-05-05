@@ -4,33 +4,30 @@ from flask import Blueprint, request, render_template
 from myapp.models.products import Products
 from myapp.database import db
 from werkzeug.utils import secure_filename
+import datetime
 
 main_blueprint = Blueprint('main_blueprint', __name__,
                            template_folder='../templates/html')
 
 
-@main_blueprint.route('/', methods=['post', 'get'])
+@main_blueprint.route('/prod_add', methods=['post', 'get'])
 def add_prod_page():
     if request.method == 'POST':
         logging.info('Add data in DB')
         file = request.files['prod_img']
+        img_name = secure_filename(str(datetime.datetime.now()))
         try:
-            add = Products(prod_name=request.form['prod_name'], prod_price=request.form['prod_price'])
+            add = Products(name=request.form['name'], price=request.form['price'], img=img_name)
             db.session.add(add)
             db.session.commit()
-            filename = secure_filename(str(Products.get_id(add)) + str(Products.get_name(add)))
-            add_img = db.session.query(Products).get(Products.get_id(add))
-            add_img.prod_img = filename
-            db.session.add(add_img)
-            db.session.commit()
-            file.save(os.path.join('myapp/static/uploads', filename))
+            file.save(os.path.join('myapp/static/uploads', img_name))
         except Exception as e:
             db.session.rollback()
             logging.error(f'Error, {e}')
     return render_template('products_add.html')
 
 
-@main_blueprint.route('/menu/')
+@main_blueprint.route('/prod_menu/')
 def prod_menu():
     menu = Products.query.all()
     return render_template('prod_menu.html', menu=menu)

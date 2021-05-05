@@ -2,7 +2,6 @@ import os.path
 from flask import Flask
 from myapp.views import init_blueprints
 from database import db
-from myapp.models.products import create_db
 
 
 def create_app():
@@ -14,8 +13,14 @@ def create_app():
     SECRET_KEY = 'FgrtGFr43Etr'
     ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
     db.init_app(app)
+    if os.path.exists('myapp/database/database.db'):
+        print('Data Base already create')
+    else:
+        db.create_all(app=app)
+        print('Data Base create')
     init_blueprints(app)
     return app
+
 
 
 if __name__ == "__main__":

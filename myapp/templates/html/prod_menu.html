@@ -5,12 +5,17 @@
     <title>Title</title>
 </head>
 <body>
-<ol>
-   {% for x in menu %}
-    <li>Товар: {{x.prod_name}} Цена: {{x.prod_price}}
-    <img src="{{ url_for('static', filename = 'uploads/'+x.prod_img) }}" width="160"
-    height="90"></li>
+  <table border="1">
+   <caption>Список товаров</caption>
+<tr>
+    <th>Изображение товара</th>
+    <th>Название товара</th>
+    <th>Цена</th>
+</tr>
+   {% for prod in menu %}
+        <tr><th><img src="{{ url_for('static', filename = 'uploads/'+prod.img) }}" width="160"
+    height="90"></th><th>{{prod.name}}</th><th>{{prod.price}}</th></tr>
   {% endfor %}
- </ol>
+</table>
 </body>
 </html>
