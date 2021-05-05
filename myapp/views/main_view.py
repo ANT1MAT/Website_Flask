@@ -2,6 +2,7 @@ import logging
 import os
 from flask import Blueprint, request, render_template
 from myapp.models.products import Products
+from myapp.models.users import Users, Profiles
 from myapp.database import db
 from werkzeug.utils import secure_filename
 import datetime
