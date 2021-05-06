@@ -9,7 +9,7 @@ def create_app():
     app = Flask(__name__)
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database/database.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['UPLOAD_FOLDER'] = 'myapp/static/uploads'
+    #app.config['UPLOAD_FOLDER'] = 'static/uploads'
     SECRET_KEY = 'FgrtGFr43Etr'
     ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
     db.init_app(app)

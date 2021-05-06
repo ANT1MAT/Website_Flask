@@ -7,8 +7,10 @@ from myapp.database import db
 from werkzeug.utils import secure_filename
 import datetime
 
-main_blueprint = Blueprint('main_blueprint', __name__,
-                           template_folder='../templates/html')
+main_blueprint = Blueprint('prod', __name__,
+                           template_folder='templates/html',
+                           static_folder='static',
+                           url_prefix='/product')
 
 
 @main_blueprint.route('/prod_add', methods=['post', 'get'])
@@ -20,8 +22,8 @@ def add_prod_page():
         try:
             add = Products(name=request.form['name'], price=request.form['price'], img=img_name)
             db.session.add(add)
+            file.save(os.path.join('myapp/views/static/uploads', img_name))
             db.session.commit()
-            file.save(os.path.join('myapp/static/uploads', img_name))
         except Exception as e:
             db.session.rollback()
             logging.error(f'Error, {e}')
