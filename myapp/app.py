@@ -1,8 +1,8 @@
 import os.path
 from flask import Flask
-from myapp.views import init_blueprints
+from myapp.products import products_blueprints
 from database import db
-
+from myapp.mainpage import mainpage_blueprints
 
 def create_app():
     # Конфигурация
@@ -10,7 +10,7 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database/database.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     #app.config['UPLOAD_FOLDER'] = 'static/uploads'
-    SECRET_KEY = 'FgrtGFr43Etr'
+    app.config['SECRET_KEY'] = 'FgrtGFr43Etr'
     ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
     db.init_app(app)
     if os.path.exists('myapp/database/database.db'):
@@ -18,7 +18,8 @@ def create_app():
     else:
         db.create_all(app=app)
         print('Data Base create')
-    init_blueprints(app)
+    products_blueprints(app)
+    mainpage_blueprints(app)
     return app
 
 
