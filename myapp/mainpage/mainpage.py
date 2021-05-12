@@ -1,7 +1,8 @@
-from flask import Blueprint, request, render_template
+from flask import Blueprint, render_template
 
 mainpage_blueprint = Blueprint('mainpage', __name__,
-                           template_folder='templates/html')
+                               template_folder='templates/html')
+
 
 @mainpage_blueprint.route('/')
 def start_page():
