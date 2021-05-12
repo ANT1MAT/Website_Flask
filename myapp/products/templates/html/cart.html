@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <table border="1">
+   <caption>Список товаров</caption>
+<tr>
+    <th>Изображение товара</th>
+    <th>Название товара</th>
+    <th>Количество</th>
+    <th>Общая стоймость</th>
+</tr>
+   {% for prod in product %}
+      {% for cart_prod in cart %}
+          {% if prod.id == cart_prod.id %}
+            <tr>
+            <th><img src="{{ url_for('prod.static', filename = 'uploads/'+prod.img) }}" width="160"
+            height="90"></th>
+            <th type="text" name=name><a href="/product/id{{prod.id}}">{{prod.name}}</a></th>
+            <th type="text" name=price>{{cart_prod.count}}</th>
+            {% set price= prod.price| int %}
+            {% set count = cart_prod.count | int %}
+            <th type="text" name=price>{{count * price}}</th>
+            </tr>
+          {% endif %}
+      {% endfor %}
+  {% endfor %}
+</table>
+</body>
+</html>

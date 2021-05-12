@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{product.name}}</title>
+</head>
+<body>
+<p></p><img src="{{ url_for('prod.static', filename = 'uploads/'+product.img) }}" width="320"
+    height="180"></p>
+<p>{{product.name}}</p>
+<form method="post">
+    <p>
+    <label>Количество:</label>
+    <input type="float" name="count" value="1">
+    <input type="submit" value="Купить">
+    </p>
+</form>
+</body>
+</html>
