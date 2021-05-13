@@ -24,10 +24,22 @@
             {% set price= prod.price| int %}
             {% set count = cart_prod.count | int %}
             <th type="text" name=price>{{count * price}}</th>
+            <th>
+                <form method="post">
+                <button type="submit" name="item" value={{prod.id}}>Удалить товар</button>
+                </form>
+            </th>
             </tr>
           {% endif %}
       {% endfor %}
   {% endfor %}
 </table>
+
+      {% with messages = get_flashed_messages() %}
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+      {% endwith %}
+
 </body>
 </html>

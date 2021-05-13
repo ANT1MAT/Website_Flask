@@ -11,9 +11,14 @@
 <form method="post">
     <p>
     <label>Количество:</label>
-    <input type="float" name="count" value="1">
+    <input type="float" name="count" value=1>
     <input type="submit" value="Купить">
     </p>
+          {% with messages = get_flashed_messages() %}
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+      {% endwith %}
 </form>
 </body>
 </html>

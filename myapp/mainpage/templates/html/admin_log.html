@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+</head>
+<body>
+<form method=post>
+  <p>
+    <label>Введите пароль администратора</label>
+    <input type="text" name="pass">
+  </p>
+  <p>
+    <input type="submit" value="Войти">
+  </p>
+</form>
+      {% with messages = get_flashed_messages() %}
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+      {% endwith %}
+</body>
+</html>
