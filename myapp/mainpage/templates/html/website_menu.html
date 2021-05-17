@@ -1,0 +1,26 @@
+<style type="text/css">
+   A {
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+    color: black
+   }
+   A:hover {
+    text-decoration: underline; /* Добавляем подчеркивание при наведении курсора на ссылку */
+    color: blue; /* Цвет ссылки */
+   }
+   A:visited {
+    color: #000000; /* Цвет посещенной ссылки */
+   }
+  </style>
+<body>
+<table bgcolor="#AFEEEE">
+<tr>
+    <th><a href="{{url_for('mainpage.start_page')}}">Главная страница</a></th>
+    <th><a href="{{url_for('prod.prod_menu')}}">Посмотреть список товаров</a></th>
+    <th><a href="{{url_for('prod.show_cart')}}">Посмотреть корзину</a></th>
+</tr>
+</table>
+<div class="content">
+    {% block content %}
+    {% endblock %}
+</div>
+</body>

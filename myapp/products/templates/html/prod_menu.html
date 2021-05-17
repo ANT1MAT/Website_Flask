@@ -1,25 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Меню продуктов</title>
 </head>
+{% extends 'website_menu.html' %}
+
+{% block content %}
 <body>
-  <table border="1">
+<table border="1">
    <caption>Список товаров</caption>
 <tr>
     <th>Изображение товара</th>
     <th>Название товара</th>
     <th>Цена</th>
+    {% if admin == 'admin' %}
+    <th>Администрирование</th>
+    {% endif %}
 </tr>
    {% for prod in menu %}
-        <tr>
-            <th><img src="{{ url_for('prod.static', filename = 'uploads/'+prod.img) }}" width="160"
-    height="90"></th>
-            <th type="text" name=name><a href="/product/id{{prod.id}}">{{prod.name}}</a></th>
-            <th type="text" name=price>{{prod.price}}</th>
-        </tr>
-  {% endfor %}
+<tr>
+    <th><img src="{{ url_for('prod.static', filename = 'uploads/'+prod.img) }}" width="160"
+             height="90"></th>
+    <th type="text" name=name><a href="/product/id{{prod.id}}">{{prod.name}}</a></th>
+    <th type="text" name=price>{{prod.price}}</th>
+        {% if admin == 'admin' %}
+            <th>
+                <form method="post">
+                <button type="submit" name="item" value={{prod.id}}>Удалить товар</button>
+                </form>
+            </th>
+        {% endif %}
+</tr>
+   {% endfor %}
 </table>
 </body>
+{% endblock %}
 </html>

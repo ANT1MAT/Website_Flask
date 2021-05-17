@@ -4,11 +4,35 @@
     <meta charset="UTF-8">
     <title>Главная страница</title>
 </head>
+  <style type="text/css">
+   A {
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+    color: black
+   }
+   A:hover {
+    text-decoration: underline; /* Добавляем подчеркивание при наведении курсора на ссылку */
+    color: blue; /* Цвет ссылки */
+   }
+   A:visited {
+    color: #000000; /* Цвет посещенной ссылки */
+   }
+  </style>
 <body>
-<p>Приветствую!</p>
-<p><a href="{{url_for('mainpage.admin')}}">Войти как администратор</a></p>
-<p><a href="{{url_for('prod.add_prod_page')}}">Добавить товар</a>
-<a href="{{url_for('prod.prod_menu')}}">Посмотреть список товаров</a></p>
-<p><a href="{{url_for('prod.show_cart')}}">Посмотреть корзину</a></p>
+    <p><a href="{{url_for('prod.prod_menu')}}">Посмотреть список товаров</a></p>
+    <p><a href="{{url_for('prod.show_cart')}}">Посмотреть корзину</a></p>
+    <p><a href="{{url_for('mainpage.admin')}}">Войти как администратор</a></p>
+    {% if admin == 'admin' %}
+    <p><a href="{{url_for('prod.add_prod_page')}}">Добавить товар</a></p>
+    {% endif %}
+
+      {% with messages = get_flashed_messages() %}
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+      {% endwith %}
+<div class="content">
+    {% block content %}
+    {% endblock %}
+</div>
 </body>
 </html>

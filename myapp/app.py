@@ -9,15 +9,16 @@ def create_app():
     app = Flask(__name__)
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database/database.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    #app.config['UPLOAD_FOLDER'] = 'static/uploads'
     app.config['SECRET_KEY'] = 'FgrtGFr43Etr'
     ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
     db.init_app(app)
+
+    # Проверка наличия БД
     if os.path.exists('myapp/database/database.db'):
-        print('Data Base already create')
+        print('База данных уже существует')
     else:
         db.create_all(app=app)
-        print('Data Base create')
+        print('База данных создана')
     products_blueprints(app)
     mainpage_blueprints(app)
     return app

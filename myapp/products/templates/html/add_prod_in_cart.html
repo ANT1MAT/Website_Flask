@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>{{product.name}}</title>
 </head>
+{% extends 'website_menu.html' %}
+
+{% block content %}
 <body>
 <p></p><img src="{{ url_for('prod.static', filename = 'uploads/'+product.img) }}" width="320"
     height="180"></p>
@@ -21,4 +24,5 @@
       {% endwith %}
 </form>
 </body>
+{% endblock %}
 </html>

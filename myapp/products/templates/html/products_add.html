@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Добавление продукта</title>
 </head>
+{% extends 'website_menu.html' %}
+
+{% block content %}
 <body>
 <form method=post enctype=multipart/form-data>
   <p>
@@ -20,4 +23,5 @@
   </p>
 </form>
 </body>
+{% endblock %}
 </html>

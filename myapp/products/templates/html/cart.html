@@ -2,8 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Корзина</title>
 </head>
+{% extends 'website_menu.html' %}
+
+{% block content %}
 <body>
   <table border="1">
    <caption>Список товаров</caption>
@@ -34,12 +37,11 @@
       {% endfor %}
   {% endfor %}
 </table>
-
       {% with messages = get_flashed_messages() %}
         {% for message in messages %}
         <p>{{ message }}</p>
         {% endfor %}
       {% endwith %}
-
 </body>
+{% endblock %}
 </html>
